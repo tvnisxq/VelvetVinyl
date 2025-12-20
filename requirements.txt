@@ -4,3 +4,13 @@ torchaudio
 TorchCodec
 demucs
 ffmpeg
+numpy 
+scipy
+librosa
+soundfile
+faiss-gpu
+fairseq
+praat-parselmouth
+pyworld
+tqdm
+resampy
