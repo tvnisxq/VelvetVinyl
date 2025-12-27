@@ -39,10 +39,13 @@ if __name__ == "__main__":
     os.makedirs(output_folder, exist_ok=True)
 
     # Pick a song(Ensure to put a song with name test_song.mp3 in the input_songs folder)
-    song_name = "Kabhi_Kabhi_Mere_Dil_Mein.mp3"
+    song_name = "Agar Tum Saath Ho.mp3"
     song_path = os.path.join(input_folder, song_name)
 
     if os.path.exists(song_path):
         separate_audio(song_path, output_folder)
     else:
         print(f"Please place '{song_name}' inside the 'input_songs' folder!")
+
+
+
