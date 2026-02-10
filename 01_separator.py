@@ -9,8 +9,9 @@ def separate_audio(song_path, output_dir):
     print(f"---> Processing using: {device.upper()} (RTX 3060 should show CUDA)")
 
     # Demucs command construction
+    model_name = "htdemucs"
     args = [
-        "-n", "htdemucs",
+        "-n", model_name,
         "--two-stems", "vocals",
         "-d", device,
         "-o", output_dir,
@@ -20,12 +21,27 @@ def separate_audio(song_path, output_dir):
     print(f"--> Splitting: {os.path.basename(song_path)}... Please wait.")
 
     try:
+        # Save original argv to restore later if needed, though mostly cosmetic here
+        original_argv = sys.argv[:]
         sys.argv = ['demucs'] + args
         separate.main()
+        sys.argv = original_argv
+        
         print(f"--> Success! Output saved in {output_dir}")
+        
+        # Construct and return the expected vocal path
+        song_base_name = os.path.splitext(os.path.basename(song_path))[0]
+        vocals_path = os.path.join(output_dir, model_name, song_base_name, "vocals.wav")
+        
+        if os.path.exists(vocals_path):
+            return os.path.abspath(vocals_path)
+        else:
+            print(f"Warning: Expected output file at {vocals_path} not found.")
+            return None
 
     except Exception as e:
         print(f"--> Error: {e}")
+        return None
 
 
 if __name__ == "__main__":
@@ -46,6 +62,3 @@ if __name__ == "__main__":
         separate_audio(song_path, output_folder)
     else:
         print(f"Please place '{song_name}' inside the 'input_songs' folder!")
-
-
-
