@@ -1,5 +1,7 @@
 # Velvet Vinyl
 
+![Velvet vinyl logo](assets/VelvetVinyl.png)
+
 An AI-powered voice conversion tool that transforms modern Bollywood songs into the style of legendary singers like Kishore Kumar, Lata Mangeshkar, Asha Bhosle, and Mohammad Rafi.
 
 ## Features
